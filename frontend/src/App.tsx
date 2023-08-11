@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import InputField from './components/inputField';
+import { Name } from './model';
+import List from './components/list';
 
-function App() {
+const App: React.FC = () => {
+  const [name, setName] = React.useState<string>(" ");
+  const [names, setNames] = React.useState<Name[]>([]);
+
+  const handleAdd = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if(name){
+      setNames([...names, {id:Date.now(), name:name, isName: true}]);
+      setName("");
+    }
+
+  };
+  
+  console.log(names);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Merabalarrr!
+      <span className="heading">YROJECT</span>
+      <InputField name={name} setName={setName} handleAdd={handleAdd} />
+      <List names={names} setNames={setNames}/>
     </div>
   );
 }
