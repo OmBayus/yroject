@@ -1,31 +1,29 @@
-import React, { useRef } from 'react'
+import React, { useRef } from "react";
 
-interface Props{
-    name: string;
-    setName: React.Dispatch<React.SetStateAction<string>>;
-    handleAdd: (e: React.FormEvent) => void;
+interface Props {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  handleAdd: (e: React.FormEvent) => void;
 }
 
-const inputField: React.FC<Props> = ({name, setName, handleAdd}) => {
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const inputRef = React.useRef<HTMLInputElement>(null);
+const InputField: React.FC<Props> = ({ name, setName, handleAdd }) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-        <form onSubmit={(e) =>{
-            handleAdd(e)
-            inputRef.current?.blur()
-            }}>
-        <input type='input'
+    <form
+      onSubmit={(e) => {
+        handleAdd(e);
+        inputRef.current?.blur();
+      }}
+    >
+      <input
+        type="input"
         ref={inputRef}
         value={name}
-        onChange={
-            (e) => setName(e.target.value)
-        }
-        />
-        </form>
-  )
-}
+        onChange={(e) => setName(e.target.value)}
+      />
+    </form>
+  );
+};
 
-export default inputField
-
+export default InputField;
